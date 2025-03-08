@@ -1,9 +1,11 @@
-
+import EventList from "@/components/EventList/EventList";
+import Header from "@/components/Header/Header";
 
 export default function Home() {
   return (
-    <div>
-      Swift Events
-    </div>
+    <section class="container">
+      <Header />
+      <EventList />
+    </section>
   );
 }
