@@ -6,7 +6,7 @@ export default function Navbar() {
     <nav>
       <div className="container flex justify-between items-center py-4">
         <div className="nav-brand">
-          <Link href="#">
+          <Link href="/">
             <button className="w-full">Swift Events</button>
           </Link>
         </div>
