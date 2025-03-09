@@ -1,23 +1,24 @@
 import ActionButtons from '@/components/Buttons/ActionButtons'
 import Image from 'next/image'
 
-export default function HeroSection() {
+export default function HeroSection({ eventInfo }) {
   return (
     <section className="container">
-      <div className="bg-gradient-to-b from-slate-200/20 to-slate-800/30">
+      <div className="bg-gradient-to-b from-slate-200/20 to-slate-800/30 h-[500px] relative">
         <Image
-          src="/google-io-2023-1.png"
-          alt="Event 1"
-          className="mx-auto" height={900} width={900} />
+          src={eventInfo?.imageUrl}
+          fill
+          alt={eventInfo?.name}
+        />
       </div>
       <div className="flex items-end">
         <div className="flex-auto py-4">
-          <h1 className="font-bold text-2xl">Google I/O Extended</h1>
-          <p className="text-[#9C9C9C] text-base mt-1">Rangpur, Dhaka, Bangladesh, Rangpur, Bangladesh</p>
+          <h1 className="font-bold text-2xl">{eventInfo?.name}</h1>
+          <p className="text-[#9C9C9C] text-base mt-1">{eventInfo?.location}</p>
           <div className="text-[#737373] text-sm mt-1">
-            <span>1k Interested</span>
+            <span>{eventInfo?.interested_ids?.length || 0} Interested {" "}</span>
             <span>|</span>
-            <span>40K Going</span>
+            <span>{" "}{eventInfo?.going_ids?.length || 0} Going</span>
           </div>
         </div>
         <ActionButtons fromDetails={true} />

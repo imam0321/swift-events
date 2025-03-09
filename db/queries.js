@@ -5,3 +5,8 @@ export async function getAllEvents() {
 
   return allEvents
 }
+
+export async function getEventById(eventId) {
+  const event = await eventModel.findById(eventId);
+  return event;
+}
