@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SignInOut from "../SignInOut/SignInOut";
 
 
 export default function Navbar() {
@@ -11,7 +12,7 @@ export default function Navbar() {
           </Link>
         </div>
         <ul className="flex gap-4 text-[#9C9C9C]">
-          <li><Link href="/login">Login</Link></li>
+          <li><SignInOut /></li>
           <li>About</li>
           <li>Contact Us</li>
         </ul>

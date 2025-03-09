@@ -21,7 +21,7 @@ async function createUser(user) {
 
 // find User
 async function fundUserByCredentials(credentials) {
-  const user = await userModel.findOne(credentials);
+  const user = await userModel.findOne(credentials).lean();
   return user;
 }
 
