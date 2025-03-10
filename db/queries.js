@@ -1,6 +1,5 @@
+import { eventModel } from "@/models/event-models";
 import { userModel } from "@/models/user-model";
-
-const { eventModel } = require("@/models/event-models");
 
 // get all events
 async function getAllEvents() {
@@ -25,4 +24,24 @@ async function fundUserByCredentials(credentials) {
   return user;
 }
 
-export { getAllEvents, getEventById, createUser, fundUserByCredentials };
+// events interested users
+async function updateInterest(eventId, authId) {
+  const event = await eventModel.findById(eventId);
+  if (event) {
+    const foundUsers = await event.interested_ids.find((id) => id === authId);
+    if (foundUsers) {
+      event.interested_ids.pull(authId);
+    } else {
+      event.interested_ids.push(authId);
+    }
+    event.save();
+  }
+}
+
+export {
+  getAllEvents,
+  getEventById,
+  createUser,
+  fundUserByCredentials,
+  updateInterest,
+};

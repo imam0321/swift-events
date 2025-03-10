@@ -21,7 +21,7 @@ export default function HeroSection({ eventInfo }) {
             <span>{" "}{eventInfo?.going_ids?.length || 0} Going</span>
           </div>
         </div>
-        <ActionButtons fromDetails={true} />
+        <ActionButtons fromDetails={true} eventId={eventInfo?._id} interestedUserIds={eventInfo?.interested_ids} />
       </div>
     </section>
   )
