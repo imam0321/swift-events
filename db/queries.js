@@ -9,7 +9,7 @@ async function getAllEvents() {
 }
 // get event by Id
 async function getEventById(eventId) {
-  const event = await eventModel.findById(eventId);
+  const event = await eventModel.findById(eventId).lean();
   return event;
 }
 
@@ -34,7 +34,7 @@ async function updateInterest(eventId, authId) {
     } else {
       event.interested_ids.push(authId);
     }
-    event.save();
+    await event.save();
   }
 }
 
@@ -42,7 +42,7 @@ async function updateInterest(eventId, authId) {
 async function updateGoing(eventId, authId) {
   const event = await eventModel.findById(eventId);
   event.going_ids.push(authId);
-  event.save();
+  await event.save();
 }
 
 export {
@@ -51,5 +51,5 @@ export {
   createUser,
   fundUserByCredentials,
   updateInterest,
-  updateGoing
+  updateGoing,
 };
