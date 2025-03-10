@@ -4,13 +4,15 @@ import useAuth from '@/app/hooks/useAuth'
 import { useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
 
-export default function ActionButtons({ eventId, interestedUserIds, fromDetails }) {
+export default function ActionButtons({ eventId, interestedUserIds, goingUserId, fromDetails }) {
   const { auth } = useAuth();
   const router = useRouter();
 
   const isInterested = interestedUserIds.find(id => id === auth?._id);
+  const isGoing = goingUserId.find(id => id === auth?._id)
 
   const [interested, setInterested] = useState(isInterested);
+  const [going, setGoing] = useState(isGoing);
   const [isPending, startTransition] = useTransition();
 
   const toggleInterest = async () => {
@@ -24,7 +26,7 @@ export default function ActionButtons({ eventId, interestedUserIds, fromDetails 
 
   const markGoing = () => {
     if (auth) {
-      router.push('/payment')
+      router.push(`/payment/${eventId}`)
     } else {
       router.push('/login')
     }
@@ -35,7 +37,7 @@ export default function ActionButtons({ eventId, interestedUserIds, fromDetails 
       <button onClick={() => startTransition(() => toggleInterest())} className={`w-full ${interested && "bg-indigo-600 hover:bg-indigo-800"}`}>
         Interested
       </button>
-      <button onClick={markGoing} className="w-full bg-[#464849] text-center py-2 px-2 rounded-md border border-[#5F5F5F]/50 shadow-sm cursor-pointer hover:bg-[#3C3D3D] transition-colors active:translate-y-1">
+      <button onClick={markGoing} className="w-full" disabled={auth && going}>
         Going
       </button>
     </div>

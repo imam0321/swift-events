@@ -38,10 +38,18 @@ async function updateInterest(eventId, authId) {
   }
 }
 
+// event update going
+async function updateGoing(eventId, authId) {
+  const event = await eventModel.findById(eventId);
+  event.going_ids.push(authId);
+  event.save();
+}
+
 export {
   getAllEvents,
   getEventById,
   createUser,
   fundUserByCredentials,
   updateInterest,
+  updateGoing
 };
