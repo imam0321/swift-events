@@ -1,8 +1,8 @@
 import { getAllEvents } from '@/db/queries'
 import EventCard from '../EventCard/EventCard'
 
-export default async function EventList() {
-  const allEvents = await getAllEvents();
+export default async function EventList({query}) {
+  const allEvents = await getAllEvents(query);
 
   
   return (

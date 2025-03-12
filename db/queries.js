@@ -2,8 +2,14 @@ import { eventModel } from "@/models/event-models";
 import { userModel } from "@/models/user-model";
 
 // get all events
-async function getAllEvents() {
-  const allEvents = await eventModel.find();
+async function getAllEvents(query) {
+  let allEvents = [];
+  if (query) {
+    const regex = new RegExp(query, "i");
+    allEvents = await eventModel.find({ name: { $regex: regex } }).lean();
+  } else {
+    allEvents = await eventModel.find().lean();
+  }
 
   return allEvents;
 }

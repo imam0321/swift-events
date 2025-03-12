@@ -16,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "Swift Events",
-  description: "Swift Events",
+  title: "Swift Events - Home",
+  description: "Swift Events Home page",
 };
 
 export default async function RootLayout({ children }) {
