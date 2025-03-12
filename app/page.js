@@ -1,11 +1,15 @@
 import EventList from "@/components/EventList/EventList";
 import Header from "@/components/Header/Header";
+import Loading from "@/components/Loading/Loading";
+import { Suspense } from "react";
 
-export default function Home({searchParams: {query}}) {
+export default function Home({ searchParams: { query } }) {
   return (
     <section className="container">
       <Header />
-      <EventList query={query}/>
+      <Suspense key={query} fallback={<Loading />}>
+        <EventList query={query} />
+      </Suspense>
     </section>
   );
 }

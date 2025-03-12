@@ -1,7 +1,9 @@
 import ActionButtons from '@/components/Buttons/ActionButtons'
+import { getBlurData } from '@/utils/blur-generator'
 import Image from 'next/image'
 
-export default function HeroSection({ eventInfo }) {
+export default async function HeroSection({ eventInfo }) {
+  const { base64 } = await getBlurData(eventInfo?.imageUrl);
   return (
     <section className="container">
       <div className="bg-gradient-to-b from-slate-200/20 to-slate-800/30 h-[500px] relative">
@@ -9,6 +11,8 @@ export default function HeroSection({ eventInfo }) {
           src={eventInfo?.imageUrl}
           fill
           alt={eventInfo?.name}
+          placeholder='blur'
+          blurDataURL={base64}
         />
       </div>
       <div className="flex items-end">
@@ -21,7 +25,7 @@ export default function HeroSection({ eventInfo }) {
             <span>{" "}{eventInfo?.going_ids?.length || 0} Going</span>
           </div>
         </div>
-        <ActionButtons fromDetails={true} eventId={eventInfo?._id} interestedUserIds={eventInfo?.interested_ids} goingUserId={eventInfo?.going_ids}  />
+        <ActionButtons fromDetails={true} eventId={eventInfo?._id} interestedUserIds={eventInfo?.interested_ids} goingUserId={eventInfo?.going_ids} />
       </div>
     </section>
   )
